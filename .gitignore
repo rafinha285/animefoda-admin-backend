@@ -10,3 +10,5 @@ yarn-error.log*
 
 .vscode/*
 /.idea/*
+/src/database
+/src/config
