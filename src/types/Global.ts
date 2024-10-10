@@ -8,6 +8,10 @@ declare global{
             db:Pool
             user?:JwtUser | jwt.JwtPayload |string
         }
+        //TODO fazer o tipo pro response fofinho hehehehehe
+        interface Response{
+            
+        }
     }
 }
 export interface JwtUser {
@@ -23,10 +27,11 @@ export interface JwtUser {
 }
 export interface UserToken{
     _id: string;
+    super:boolean;
     username: string;
     expires_at:Date;
     session_id:string;
 }
-interface TokenRequest extends e.Request{
-    user?:JwtUser | jwt.JwtPayload |string
-}
+// interface TokenRequest extends e.Request{
+//     user?:JwtUser | jwt.JwtPayload |string
+// }

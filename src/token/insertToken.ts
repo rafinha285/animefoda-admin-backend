@@ -18,7 +18,7 @@ export default async function insertToken(req:e.Request,userR:{
         let result:QueryResult<JwtUser> = await req.db.query(`INSERT INTO users.users_sessions (
                     user_id, expires_at, user_agent, time_zone, web_gl_vendor, web_gl_renderer, ip_address
                 ) VALUES ($1, $2, $3, $4, $5, $6, $7)
-                                                              RETURNING *`
+                RETURNING *`
             ,[
                 userR._id,
                 expires_at,
@@ -28,10 +28,12 @@ export default async function insertToken(req:e.Request,userR:{
                 userR.web_gl_renderer,
                 req.socket.remoteAddress,
             ]);
+        let userResult = await req.db.query("SELECT super FROM users.users WHERE _id = $1",[userR._id])
         if(result.rows.length !== 0){
             let row = result.rows[0];
             let user:UserToken = {
                 _id:row._id,
+                super:userResult.rows[0].super,
                 username:row.username,
                 expires_at:row.expires_at,
                 session_id:row.session_id,

@@ -12,6 +12,7 @@ export enum ErrorType {
     invalidEmail,
     isLoggedElsewhere,
     unauthorized,
+    notSuper,
     default
 }
 export function sendError(res:e.Response,errorType:ErrorType = ErrorType.default,status:number = 500,menssage:any = ""){
@@ -56,6 +57,9 @@ export function sendError(res:e.Response,errorType:ErrorType = ErrorType.default
         res.clearCookie("token")
         res.status(401).json({success:false,message:"Essa operação não é autorizada"})
     }
+    function notSuper(res:e.Response){
+        res.status(401).json({success:false,message:"Somente um super usuario pode fazer isso"})
+    }
     switch(errorType){
         case ErrorType.NotId:
             notId(res)
@@ -86,6 +90,9 @@ export function sendError(res:e.Response,errorType:ErrorType = ErrorType.default
             break
         case ErrorType.unauthorized:
             unauthorized(res)
+            break
+        case ErrorType.notSuper:
+            notSuper(res)
             break
         case ErrorType.default:
             error(res,status,menssage)

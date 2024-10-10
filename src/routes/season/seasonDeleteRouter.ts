@@ -2,8 +2,8 @@ import { Router } from "express";
 import { checkToken } from "../../token/checkToken";
 import checkIsSuper from "../../token/checkIsSuper";
 
-const animeDeleteRouter = Router()
+const seasonDeleteRouter = Router()
 
-animeDeleteRouter.delete("/:id",checkToken,checkIsSuper)
+seasonDeleteRouter.delete("/:aniId/:id",checkToken,checkIsSuper,)
 
-export default animeDeleteRouter
+export default seasonDeleteRouter
