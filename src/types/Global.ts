@@ -1,5 +1,5 @@
 import * as jwt from "jsonwebtoken"
-import e from 'express';
+import e, {Response} from 'express';
 import { Pool, PoolClient } from "pg";
 
 declare global{
@@ -10,7 +10,7 @@ declare global{
         }
         //TODO fazer o tipo pro response fofinho hehehehehe
         interface Response{
-            
+            ResBody:;
         }
     }
 }

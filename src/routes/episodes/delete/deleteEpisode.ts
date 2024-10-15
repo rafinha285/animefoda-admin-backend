@@ -31,6 +31,7 @@ export default async function deleteEpisode(req:e.Request, res: e.Response){
         await req.db.query("COMMIT")
         res.json({success:true,message:`Episódio deletado: ${id}`})
     }catch(err){
+        await req.db.query("ROLLBACK")
         sendError(res,ErrorType.default,500,err)
     }
 }

@@ -6,12 +6,6 @@ import {JwtUser, UserToken} from "../types/Global";
 import deleteToken from "./deleteToken";
 export async function checkToken(req:e.Request,res:e.Response,next:e.NextFunction){
     try{
-        //TODO fazer o site mandar o
-        //AND user_agent = $2
-        // AND time_zone = $3
-        // AND web_gl_vendor = $4
-        // AND web_gl_renderer = $5
-        // para ver se é o usuario de mesmo token
         const { timezone, webglrenderer, webglvendor } = req.headers;
         const userAgent = req.headers['user-agent']
         const tokenHeader = req.headers.authorization?.split(" ")[1];

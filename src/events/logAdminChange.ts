@@ -33,9 +33,26 @@ export type AdminLoggerEmitterType = {
 
 export const eventLoggerAdmin = new LoggerAdminEmitter<AdminLoggerEmitterType>()
 
-eventLoggerAdmin.on("anime-change",(e,user)=>{
+eventLoggerAdmin.on("anime-change",async (e,user)=>{
     try{
-        pgClient.query("INSERT INTO users.user_admin_log (user_id, command,session_id) values ($1,$2,$3)",[user._id,e,user.session_id])
+        console.log('User ID:', user._id);
+        console.log('Event:', e);
+        console.log('Session ID:', user.session_id);
+
+        // Verifica se os valores estão válidos
+        if (!user._id || !user.session_id || !e) {
+            console.error('Erro: Valores inválidos para o INSERT');
+            return;
+        }
+
+        // Tenta fazer o INSERT
+        const result = await pgClient.query(
+            "INSERT INTO users.user_admin_log (user_id, command, session_id) VALUES ($1, $2, $3) RETURNING *",
+            [user._id, e, user.session_id]
+        );
+        await pgClient.query("COMMIT")
+
+        console.log('INSERT executado com sucesso:', result);
     }catch(err){
         Console.error(err)
         throw err

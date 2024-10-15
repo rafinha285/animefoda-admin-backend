@@ -14,9 +14,10 @@ export default async function deleteSeason(req:e.Request,res:e.Response){
         await req.db.query("DELETE FROM anime.seasons WHERE anime_id = $1 AND id = $2",[aniId,id])
         fs.unlinkSync(seasonPath)
 
-        await req.db.query("BEGIN")
+        await req.db.query("COMMIT")
         res.json({success:true,message:`Season deletada: ${aniId}/${id}`})
     }catch(err){
+        await req.db.query("ROLLBACK")
         sendError(res,ErrorType.default,500,err)
     }
 }

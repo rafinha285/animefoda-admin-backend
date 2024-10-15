@@ -19,6 +19,7 @@ export default async function addProds(req:e.Request,res:e.Response) {
         await req.db.query("COMMIT")
         res.json({success:true,result:prodResult})
     }catch(err){
+        await req.db.query("ROLLBACK")
         sendError(res,ErrorType.default,500,err)
     }
 }
