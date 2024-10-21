@@ -39,7 +39,7 @@ export interface Anime{
     averageeptime?:number;
     date_added?:Date;
     visible:boolean;
-    weekday:string
+    weekday?:string
 }
 export interface AnimeUser{
     user_id:string;

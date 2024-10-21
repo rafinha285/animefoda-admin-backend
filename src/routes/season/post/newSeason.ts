@@ -20,7 +20,7 @@ export default async function newSeason(req:e.Request, res: e.Response) {
         console.log(result)
 
         await req.db.query("COMMIT")
-        res.json({success:true,message:`season adicionada: ${aniId}/${result.rows[0].id}`})
+        res.json({success:true,season:result.rows[0]})
         // res.json({success:true,message:`test`})
     }catch(err:any){
         await req.db.query("ROLLBACK")

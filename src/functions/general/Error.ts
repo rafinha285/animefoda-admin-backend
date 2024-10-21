@@ -1,6 +1,5 @@
 import * as e from 'express'
 import Console from './Console'
-
 export enum ErrorType {
     NotId ,
     Exist ,
@@ -12,6 +11,7 @@ export enum ErrorType {
     invalidEmail,
     isLoggedElsewhere,
     unauthorized,
+    unauthorizedNoRemove,
     notSuper,
     default
 }
@@ -53,6 +53,9 @@ export function sendError(res:e.Response,errorType:ErrorType = ErrorType.default
     function isLoggedElsewhere(res:e.Response){
         res.status(409).json({success:false,message:"Usuário já está logado em outro lugar."})
     }
+    function unauthorizedNoRemove(res:e.Response){
+        res.status(401).json({success:false,message:"Essa operação não é autorizada"})
+    }
     function unauthorized(res:e.Response){
         res.clearCookie("token")
         res.status(401).json({success:false,message:"Essa operação não é autorizada"})
@@ -90,6 +93,9 @@ export function sendError(res:e.Response,errorType:ErrorType = ErrorType.default
             break
         case ErrorType.unauthorized:
             unauthorized(res)
+            break
+        case ErrorType.unauthorizedNoRemove:
+            unauthorizedNoRemove(res)
             break
         case ErrorType.notSuper:
             notSuper(res)

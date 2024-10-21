@@ -13,6 +13,8 @@ import episodesGetRouter from "./routes/episodes/episodesGetRouter";
 import seasonPostRouter from "./routes/season/seasonPostRouter";
 import seasonDeleteRouter from "./routes/season/seasonDeleteRouter";
 import animePatchRouter from "./routes/anime/animePatchRouter";
+import userPostRouter from "./routes/user/userPostRouter";
+import animeDeleteRouter from "./routes/anime/animeDeleteRouter";
 
 const app = e()
 
@@ -24,11 +26,11 @@ app.use(async (req:e.Request,res:e.Response,next:e.NextFunction)=>{
 })
 
 
-
 //rotas de animes
 app.use('/ani/g/',animeGetRouter)
 app.use('/ani/p/',animePostRouter)
 app.use('/ani/patch/',animePatchRouter)
+app.use('/ani/delete/',animeDeleteRouter)
 //rotas de seasons
 app.use('/ani/season/p/',seasonPostRouter)
 app.use('/ani/season/delete/',seasonDeleteRouter)
@@ -36,6 +38,7 @@ app.use('/ani/season/delete/',seasonDeleteRouter)
 app.use('/ep/g/',episodesGetRouter)
 //rotas de usuarios
 app.use('/user/g/',userGetRouter)
+app.use('/user/p/',userPostRouter)
 
 
 
