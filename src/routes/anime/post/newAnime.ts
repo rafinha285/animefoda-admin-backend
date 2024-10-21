@@ -19,10 +19,10 @@ export default async function newAnime(req:e.Request, res: e.Response) {
         for(const producerName of producers){
             prod.push(await findOrCreateProd(producerName,"producers",req))
         }
-        for(const producerName of producers){
+        for(const producerName of creators){
             crea.push(await findOrCreateProd(producerName,"creators",req))
         }
-        for(const producerName of producers){
+        for(const producerName of studios){
             stud.push(await findOrCreateProd(producerName,"studios",req))
         }
         await req.db.query("BEGIN")
