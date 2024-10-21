@@ -11,7 +11,7 @@ const storageAnimeImg = multer.memoryStorage();
 const uploadAnimeImg =multer({storage: storageAnimeImg});
 
 animePostRouter.post("/add/prods/:id/:prod/:prodName",checkToken,addProds)
-animePostRouter.post("/img/:id",checkToken,uploadAnimeImg.single("img"),uploadImg)
+animePostRouter.post("/img/:id",checkToken,uploadAnimeImg.single("file"),uploadImg)
 animePostRouter.post("/new",checkToken,newAnime)
 
 export default animePostRouter;
