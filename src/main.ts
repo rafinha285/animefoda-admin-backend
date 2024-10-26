@@ -15,6 +15,7 @@ import seasonDeleteRouter from "./routes/season/seasonDeleteRouter";
 import animePatchRouter from "./routes/anime/animePatchRouter";
 import userPostRouter from "./routes/user/userPostRouter";
 import animeDeleteRouter from "./routes/anime/animeDeleteRouter";
+import episodesDeleteRouter from "./routes/episodes/episodesDeleteRouter";
 
 const app = e()
 
@@ -36,6 +37,7 @@ app.use('/ani/season/p/',seasonPostRouter)
 app.use('/ani/season/delete/',seasonDeleteRouter)
 //rotas para episódios
 app.use('/ep/g/',episodesGetRouter)
+app.use('/ep/delete/',episodesDeleteRouter)
 //rotas de usuarios
 app.use('/user/g/',userGetRouter)
 app.use('/user/p/',userPostRouter)
