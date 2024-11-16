@@ -13,9 +13,9 @@ export default async function deleteEpisode(req:e.Request, res: e.Response){
         if(!id||!aniId||!seasonId){
             return sendError(res,ErrorType.undefined)
         }
-        let query = "DELETE FROM anime.episodes WHERE id = $1 AND season_id = $2 AND anime_id = $2"
+        let query = "DELETE FROM anime.episodes WHERE id = $1 AND season_id = $2 AND anime_id = $3"
         eventLoggerAdmin.emit("anime-change",query,req.user as UserToken);
-        // await req.db.query("BEGIN");
+        await req.db.query("BEGIN");
 
         await req.db.query("UPDATE anime.seasons SET episodes = array_remove(episodes,$1) WHERE anime_id = $2 AND id = $3",[id,aniId,seasonId])
 
@@ -29,10 +29,10 @@ export default async function deleteEpisode(req:e.Request, res: e.Response){
             deleteFolderRecursive(epPath);
         }
 
-        // await req.db.query("COMMIT")
+        await req.db.query("COMMIT")
         res.json({success:true,message:`Episódio deletado: ${id}`})
     }catch(err){
-        // await req.db.query("ROLLBACK")
+        await req.db.query("ROLLBACK")
         sendError(res,ErrorType.default,500,err)
     }
 }
