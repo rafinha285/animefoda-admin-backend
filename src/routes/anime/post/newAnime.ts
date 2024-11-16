@@ -75,7 +75,8 @@ export default async function newAnime(req:e.Request, res: e.Response) {
         ])
 
         var p = path.join(ANIME_PATH,ani.rows[0].id)
-        fs.mkdirSync(p)
+        const mode = 0o777 & ~process.umask();
+        fs.mkdirSync(p,{recursive:true,mode:mode});
         fs.mkdirSync(path.join(p,"img"),{recursive:true, mode: 0o777 })
         fs.mkdirSync(path.join(p,"characters"),{recursive:true, mode: 0o777 })
         fs.mkdirSync(path.join(p,'seasons'),{recursive:true, mode: 0o777 })

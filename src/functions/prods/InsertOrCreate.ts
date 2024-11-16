@@ -5,7 +5,7 @@ import {UserToken} from "../../types/Global";
 export async function findOrCreateProd(name: string,typee:"producers"|"creators"|"studios",req:e.Request):Promise<string> {
     try {
         var prod = await req.db.query(`SELECT * FROM anime.${typee} WHERE name = $1 LIMIT 1`,[name])
-        // console.log(prod)
+        console.log(prod)
         if(prod.rows.length == 0){
             console.log("insert prod")
             const query = `INSERT INTO anime.${typee} (id,name) VALUES (gen_random_uuid (), $1) RETURNING id`
