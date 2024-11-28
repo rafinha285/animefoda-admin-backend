@@ -17,8 +17,8 @@ export default async function insertToken(req:e.Request,userR:{
         expires_at.setDate(expires_at.getDate()+7)
 
         let result = await req.db.query(`INSERT INTO users.users_sessions (
-                    user_id, expires_at, user_agent, time_zone, web_gl_vendor, web_gl_renderer, ip_address
-                ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+                    user_id, expires_at, user_agent, time_zone, web_gl_vendor, web_gl_renderer
+                ) VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING *`
             ,[
                 userR._id,
@@ -27,7 +27,6 @@ export default async function insertToken(req:e.Request,userR:{
                 userR.time_zone,
                 userR.web_gl_vendor,
                 userR.web_gl_renderer,
-                req.socket.remoteAddress,
             ]);
         let userResult = await req.db.query("SELECT superuser FROM users.users WHERE _id = $1",[userR._id])
         // Console.log(userResult)
