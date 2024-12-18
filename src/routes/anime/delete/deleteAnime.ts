@@ -15,9 +15,9 @@ export default async function deleteAnime(req:e.Request, res: e.Response) {
         `
         Console.warn(`Anime deletado ${req.params.id}`)
         eventLoggerAdmin.emit("anime-change", query,req.user as UserToken)
-        // await req.db.query(query,[req.params.id])
-        // await req.db.query("COMMIT")
-        // deleteFolderRecursive(path.join(ANIME_PATH,req.params.id))
+        await req.db.query(query,[req.params.id])
+        await req.db.query("COMMIT")
+        deleteFolderRecursive(path.join(ANIME_PATH,req.params.id))
         res.json({success:true,message:`Anime deletado ${req.params.id}`
     })
     }catch(err){
