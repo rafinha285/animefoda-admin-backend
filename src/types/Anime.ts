@@ -1,5 +1,5 @@
 import {EpisodeUser} from "./Episode";
-import {character} from "./Character";
+// import {Character} from "./Character";
 import {Audio, priorityValue, quality, userAnimeState} from "./General";
 
 export interface Producer{
@@ -34,7 +34,7 @@ export interface Anime{
     genre:string[];
     seasons?:Season[];
     rating?:number;
-    characters?:character[];
+    // characters?:Character[];
     // path?:string;
     averageeptime?:number;
     date_added?:Date;
