@@ -13,7 +13,7 @@ const storageCharacter = multer.memoryStorage()
 const uploadCharacter = multer({ storage: storageCharacter });
 
 characterPostRouter.post("/new",checkToken,newCharacter)
-characterPostRouter.post("/img/:id/:charId",checkToken,uploadCharacter.single("file"),uploadImg)
+characterPostRouter.post("/img/:aniId/:id",checkToken,uploadCharacter.single("file"),uploadImg)
 characterPostRouter.delete("/delete/:charId",checkToken,checkIsSuper,deleteCharacter)
 characterPostRouter.post("/update/:charId",checkToken,updateCharacter)
 
