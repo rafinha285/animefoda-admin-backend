@@ -13,12 +13,20 @@ export enum ErrorType {
     unauthorized,
     unauthorizedNoRemove,
     notSuper,
+    notFound,
+    badRequest,
     default
 }
 export function sendError(res:e.Response,errorType:ErrorType = ErrorType.default,status:number = 500,menssage:any = ""){
     function error(res:e.Response,status:number,menssage:string){
         Console.error(menssage)
         res.status(status).json({success:false,message:menssage})
+    }
+    function notFound(res:e.Response){
+        res.status(404).json({success:false,message:"Not Found"})
+    }
+    function badRequest(res:e.Response){
+        res.status(400)
     }
     function notId(res:e.Response){
         Console.error("The ids are not a valid ObjectId or does not exist")
@@ -66,6 +74,12 @@ export function sendError(res:e.Response,errorType:ErrorType = ErrorType.default
     switch(errorType){
         case ErrorType.NotId:
             notId(res)
+            break
+        case ErrorType.notFound:
+            notFound(res)
+            break
+        case ErrorType.badRequest:
+            badRequest(res)
             break
         case ErrorType.Exist:
             exist(res)

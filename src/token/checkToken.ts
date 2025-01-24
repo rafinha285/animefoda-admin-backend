@@ -29,7 +29,7 @@ export async function checkToken(req:e.Request,res:e.Response,next:e.NextFunctio
             return sendError(res,ErrorType.invalidToken);
         }
         const user = jwtResult as UserToken;
-        Console.log(jwtResult)
+        // Console.log("jwtResult",jwtResult)
         let result = await req.db.query(`
             SELECT expires_at
             FROM users.users_sessions
@@ -42,9 +42,9 @@ export async function checkToken(req:e.Request,res:e.Response,next:e.NextFunctio
               AND session_id = $6
         `,[user._id,userAgent,timezone,webglvendor,webglrenderer,user.session_id])
         // Console.log(result)
-        // Console.log(result.rows.length === 0)
+        // Console.log([user._id,userAgent,timezone,webglvendor,webglrenderer,user.session_id])
         if(result.rows.length === 0){
-            return sendError(res,ErrorType.unauthorized);
+            return sendError(res,ErrorType.unauthorizedNoRemove);
         }
         // console.log(new Date(result.rows[0].expires_at).getTime() > new Date().getTime())
         // if(new Date(result.rows[0].expires_at).getTime() < new Date().getTime()){

@@ -29,6 +29,7 @@ export class LoggerAdminEmitter<TEvents extends Record<string, any>> {
 export type AdminLoggerEmitterType = {
     'anime-change':[string,UserToken],
     'img-change':[string,UserToken],
+    'character-change':[string,UserToken],
 }
 
 export const eventLoggerAdmin = new LoggerAdminEmitter<AdminLoggerEmitterType>()

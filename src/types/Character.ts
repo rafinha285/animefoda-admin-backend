@@ -1,6 +1,6 @@
-export interface character{
-    _id:string;
+export interface Character {
+    id:string;
     name:string;
     role:string;
-    anime:string;
+    anime_id:string;
 }
